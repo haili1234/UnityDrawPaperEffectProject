@@ -15,12 +15,12 @@ namespace NatCamU.Examples {
 
 		public void StartRecording () {
 			// Start recording
-			//NatCam.StartRecording(Configuration.Default, OnVideo);
+			NatCam.StartRecording(Configuration.Default, OnVideo);
 		}
 
 		public void StopRecording () {
 			// Stop recording // The OnVideo callback will then be invoked with the video path
-			//NatCam.StopRecording();
+			NatCam.StopRecording();
 		}
 
 		private void OnVideo (string path) {

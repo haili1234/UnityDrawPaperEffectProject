@@ -80,11 +80,29 @@ namespace NatCamU.Core {
 		/// </summary>
 		/// <param name="newCamera">Optional. The camera to switch to. An int or a DeviceCamera can be passed here</param>
 		[CoreDoc(79, 3), CoreCode(14), CoreCode(15), CoreCode(16)]
-		public virtual void SwitchCamera (int newCamera = -1) {
+		public virtual void SwitchCamera (int newCamera = -1)
+		{
+			
 			// Select the new camera ID // If no argument is given, switch to the next camera
+			Debug.Log("DeviceCamera.Cameras.Count:"+DeviceCamera.Cameras.Count);
 			newCamera = newCamera < 0 ? (NatCam.Camera + 1) % DeviceCamera.Cameras.Count : newCamera;
+			Debug.Log("newCamera:"+newCamera);
 			// Set the new active camera
-			NatCam.Camera = newCamera;
+			//NatCam.Camera = newCamera;
+
+			if (facing == Facing.Front)
+			{
+				facing =Facing.Rear;
+				NatCam.Camera = DeviceCamera.RearCamera;
+				Debug.Log("NatCam.Camera  Facing.Front:"+NatCam.Camera);
+			}
+			else
+			{
+				facing =Facing.Front;
+				NatCam.Camera = DeviceCamera.FrontCamera;
+				Debug.Log("NatCam.Camera Facing.Front:"+NatCam.Camera);
+			}
+			
 		}
 	}
 }

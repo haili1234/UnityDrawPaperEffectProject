@@ -3,6 +3,8 @@
 *   Copyright (c) 2016 Yusuf Olokoba
 */
 
+using NatCamU.Pro;
+
 namespace NatCamU.Examples {
 
     using UnityEngine;
@@ -21,6 +23,27 @@ namespace NatCamU.Examples {
         public Image checkIco, flashIco;
         private Texture2D photo;
 
+#if NATCAM_PRO || NATCAM_PROFESSIONAL
+
+        public void StartRecording () {
+            // Start recording
+            NatCam.StartRecording(Configuration.Default, OnVideo);
+        }
+
+        public void StopRecording () {
+            // Stop recording // The OnVideo callback will then be invoked with the video path
+            NatCam.StopRecording();
+        }
+
+        private void OnVideo (string path) {
+#if UNITY_IOS || UNITY_ANDROID
+            // Play the video
+            Debug.Log("原生录制："+path);
+            //Handheld.PlayFullScreenMovie(path);
+#endif
+        }
+#endif
+        
 
         #region --Unity Messages--
 
